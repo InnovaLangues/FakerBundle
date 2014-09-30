@@ -1,0 +1,40 @@
+{
+    "name" : "innova/faker-bundle",
+    "description" : "Faker bundle for Claroline Connect application",
+    "type" : "library",
+    "authors" : [{
+            "name" : "Arnaud Bey",
+            "email" : "arnaud.bey@u-grenoble3.fr"
+        }, {
+            "name" : "Axel Penin",
+            "email" : "axel.penin@u-grenoble3.fr"
+        }, {
+            "name" : "Eric Vincent",
+            "email" : "eric.vincent@u-grenoble3.fr"
+        }, {
+            "name" : "Donovan Tengblad",
+            "email" : "donovan.tengblad@u-grenoble3.fr"
+        }
+    ],
+    "keywords" : [
+        "faker",
+        "symfony2"
+    ],
+    "homepage" : "http://github.com/InnovaLangues/FakerBundle",
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+        "symfony/symfony" : "2.*",
+        "php" : ">=5.3.0",
+        "claroline/kernel-bundle" : "~1.0",
+        "symfony/framework-bundle" : "2.*",
+        "fzaninotto/faker" : "~1.4"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Innova\\AngularUITreeBundle" : "."
+        }
+    },
+    "target-dir" : "Innova/AngularUITreeBundle"
+}
