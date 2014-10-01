@@ -25,7 +25,7 @@ class FakeCommand extends ContainerAwareCommand
         $excludedUsernames = array("admin");
 
         foreach ($users as $user) {
-            if (!in_array($user, $excludedUsernames)) {
+            if (!in_array($user->getUsername, $excludedUsernames)) {
                 $output->writeln($user->getUsername()." ".$user->getLastName()." ".$user->getFirstName()." ".$user->getMail()."\n");
                 $output->writeln("->");
                 
