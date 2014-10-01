@@ -39,15 +39,19 @@ class FakeCommand extends ContainerAwareCommand
                 $lastNameOrig = $user->getLastName();
                 $firstNameOrig = $user->getFirstName();
                 $mailOrig = $user->getMail();
-                $workspaceNameOrig = $user->getPersonalWorkspace()->getName(); 
+                if($workspace){
+                    $workspaceNameOrig = $workspace->getName();
+                }
 
                 // set user properties
                 $user->setFirstName($firstName);
                 $user->setLastName($lastName);
                 $user->setUsername($username);
                 $user->setMail($mail);
-                $workspace->setName($workspaceName);
-                $workspace->setCode($username);
+                if($workspace){
+                    $workspace->setName($workspaceName);
+                    $workspace->setCode($username);
+                }
                 $em->persist($workspace);
                 $em->persist($user);
 
@@ -55,9 +59,10 @@ class FakeCommand extends ContainerAwareCommand
                 $output->writeln($firstNameOrig . " -> " . $firstName);
                 $output->writeln($lastNameOrig . " -> " . $lastName);
                 $output->writeln($mailOrig . " -> " . $mail);
-                $output->writeln($workspaceNameOrig . " -> " . "Espace de ".$username);
+                if($workspace){
+                    $output->writeln($workspaceNameOrig . " -> " . "Espace de ".$username);
+                }
                 $output->writeln("");
-                
             }
         }
         $em->flush();
