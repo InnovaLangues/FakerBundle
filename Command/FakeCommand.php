@@ -51,8 +51,8 @@ class FakeCommand extends ContainerAwareCommand
                 if($workspace){
                     $workspace->setName($workspaceName);
                     $workspace->setCode($username);
+                    $em->persist($workspace);
                 }
-                $em->persist($workspace);
                 $em->persist($user);
 
                 $output->writeln($usernameOrig . " -> " . $username);
