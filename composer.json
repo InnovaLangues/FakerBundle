@@ -30,11 +30,5 @@
         "claroline/kernel-bundle" : "~1.0",
         "symfony/framework-bundle" : "2.*",
         "fzaninotto/faker" : "~1.4"
-    },
-    "autoload" : {
-        "psr-0" : {
-            "Innova\\AngularUITreeBundle" : "."
-        }
-    },
-    "target-dir" : "Innova/AngularUITreeBundle"
+    }
 }
