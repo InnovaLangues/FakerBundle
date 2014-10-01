@@ -1,6 +1,6 @@
 <?php
 
-namespace Innova\InnovaFakerBundle;
+namespace Innova\FakerBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Claroline\KernelBundle\Bundle\AutoConfigurableInterface;
