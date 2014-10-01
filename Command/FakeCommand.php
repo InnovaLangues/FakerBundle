@@ -18,7 +18,7 @@ class FakeCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $faker = Faker\Factory::create();
+        $faker = Factory::create();
 
         $em = $this->getContainer()->get('doctrine')->getEntityManager('default');
         $users = $em->getRepository('ClarolineCoreBundle:User')->findAll();
@@ -26,21 +26,38 @@ class FakeCommand extends ContainerAwareCommand
 
         foreach ($users as $user) {
             if (!in_array($user->getUsername(), $excludedUsernames)) {
-                $output->writeln($user->getUsername()." ".$user->getLastName()." ".$user->getFirstName()." ".$user->getMail()."\n");
-                $output->writeln("->");
-                
-                $username = $faker->userName;
+                // generate fake infos
+                $username = $faker->unique()->userName;
                 $lastName = $faker->lastName;
                 $firstName = $faker->firstName;
-                $email = $faker->safeEmail;
+                $mail = $faker->unique()->safeEmail;
+                $workspace =  $user->getPersonalWorkspace();
+                $workspaceName = "Espace de ".$username;
 
+                // get original user properties
+                $usernameOrig = $user->getUsername();
+                $lastNameOrig = $user->getLastName();
+                $firstNameOrig = $user->getFirstName();
+                $mailOrig = $user->getMail();
+                $workspaceNameOrig = $user->getPersonalWorkspace()->getName(); 
+
+                // set user properties
                 $user->setFirstName($firstName);
                 $user->setLastName($lastName);
                 $user->setUsername($username);
-                $user->setMail($email);
-
+                $user->setMail($mail);
+                $workspace->setName($workspaceName);
+                $workspace->setCode($username);
+                $em->persist($workspace);
                 $em->persist($user);
-                $output->writeln($username." ".$lastName." ".$firstName." ".$email."\n");
+
+                $output->writeln($usernameOrig . " -> " . $username);
+                $output->writeln($firstNameOrig . " -> " . $firstName);
+                $output->writeln($lastNameOrig . " -> " . $lastName);
+                $output->writeln($mailOrig . " -> " . $mail);
+                $output->writeln($workspaceNameOrig . " -> " . "Espace de ".$username);
+                $output->writeln("");
+                
             }
         }
         $em->flush();
